@@ -1,6 +1,19 @@
 Package: R.huge
 ===============
 
+Version: 0.1.5 [2006-08-29xx]
+o Now the startup message when loading the package is generated with
+  packageStartupMessage() so that it can be suppressed.
+o BUG FIX: Argument 'dimOrder' of the AbstractFileArray constructor was
+  not recognized causing weird results if it was intended to be in a
+  non-increasing order, e.g. FileMatrix(..., byrow=TRUE).
+o BUG FIX: Reading/writing data from and to a FileMatrix via 
+  "["()/"[<-"() was broken. Thanks Jens Oehlschlägel for troubleshooting 
+  and reporting this.
+o Added private readBinFragments() and writeBinFragments().
+o Added tests/ scripts.
+
+
 Version: 0.1.4 [2006-05-21]
 o Committed to CRAN.
 o Package passed R CMD check on R v2.5.0 and R v2.6.0 devel.

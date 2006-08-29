@@ -1,25 +1,25 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Do not modify this file since it was automatically generated from:
 % 
-%  AbstractFileArray.R
+%  FileMatrix.R
 % 
 % by the Rdoc compiler part of the R.oo package.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\name{as.character.AbstractFileArray}
-\alias{as.character.AbstractFileArray}
-\alias{AbstractFileArray.as.character}
-\alias{as.character.AbstractFileArray}
-\alias{as.character,AbstractFileArray-method}
+\name{as.character.FileMatrix}
+\alias{as.character.FileMatrix}
+\alias{FileMatrix.as.character}
+\alias{as.character.FileMatrix}
+\alias{as.character,FileMatrix-method}
 
 
-\title{Returns a short string describing the file array}
+\title{Returns a short string describing the file matrix}
 
 \description{
- Returns a short string describing the file array.
+ Returns a short string describing the file matrix.
 }
 
-\usage{\method{as.character}{AbstractFileArray}(x, ...)}
+\usage{\method{as.character}{FileMatrix}(x, ...)}
 
 \arguments{
   \item{...}{Not used.}
@@ -32,7 +32,7 @@
 \author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
 
 \seealso{
-  For more information see \code{\link{AbstractFileArray}}.
+  For more information see \code{\link{FileMatrix}}.
 }
 
 
