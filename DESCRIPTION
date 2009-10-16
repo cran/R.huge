@@ -1,6 +1,6 @@
 Package: R.huge
-Version: 0.1.9
-Date: 2009-09-22
+Version: 0.2.0
+Date: 2009-10-16
 Title: Methods for accessing huge amounts of data [DEPRECATED]
 Author: Henrik Bengtsson <henrikb@braju.com>
 Maintainer: Henrik Bengtsson <henrikb@braju.com>
@@ -19,6 +19,8 @@ URL: http://www.braju.com/R/
 ContribURL: http://www.braju.com/R/
 DevelURL: http://www.braju.com/R/
 LazyLoad: TRUE
-Packaged: 2009-09-23 02:45:11 UTC; hb
 Repository: CRAN
-Date/Publication: 2009-09-23 16:45:21
+Repository/R-Forge/Project: r-dots
+Repository/R-Forge/Revision: 280
+Date/Publication: 2009-10-18 10:04:43
+Packaged: 2009-10-17 20:07:12 UTC; rforge
