@@ -1,10 +1,10 @@
 Package: R.huge
-Version: 0.2.1
-Date: 2010-11-08
+Version: 0.2.2
+Date: 2011-02-01
 Title: Methods for accessing huge amounts of data [DEPRECATED]
 Author: Henrik Bengtsson <henrikb@braju.com>
 Maintainer: Henrik Bengtsson <henrikb@braju.com>
-Depends: R (>= 2.5.0), R.oo (>= 1.7.3), R.utils (>= 1.5.7)
+Depends: R (>= 2.5.0), R.oo (>= 1.7.5), R.utils (>= 1.6.1)
 Description: THIS PACKAGE HAS BEEN DEPRECATED. Do not start building
         new projects based on it. Cross-platform alternatives are the
         following packages: bigmemory (CRAN), ff (CRAN), BufferedMatrix
@@ -19,6 +19,6 @@ URL: http://www.braju.com/R/
 LazyLoad: TRUE
 Repository: CRAN
 Repository/R-Forge/Project: r-dots
-Repository/R-Forge/Revision: 437
-Date/Publication: 2011-02-01 07:48:31
-Packaged: 2011-01-31 21:40:19 UTC; rforge
+Repository/R-Forge/Revision: 440
+Date/Publication: 2011-02-03 08:17:52
+Packaged: 2011-02-02 22:15:14 UTC; rforge
