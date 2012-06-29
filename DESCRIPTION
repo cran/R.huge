@@ -1,10 +1,11 @@
 Package: R.huge
-Version: 0.3.0
-Date: 2011-07-23
+Version: 0.4.1
+Date: 2012-06-29
 Title: Methods for accessing huge amounts of data [DEPRECATED]
 Author: Henrik Bengtsson <henrikb@braju.com>
 Maintainer: Henrik Bengtsson <henrikb@braju.com>
-Depends: R (>= 2.5.0), R.oo (>= 1.8.1), R.utils (>= 1.7.5)
+Depends: R (>= 2.10.0), R.utils (>= 1.12.1)
+Imports: R.methodsS3 (>= 1.4.2), R.oo (>= 1.9.8)
 Description: THIS PACKAGE HAS BEEN DEPRECATED. Do not start building
         new projects based on it. Cross-platform alternatives are the
         following packages: bigmemory (CRAN), ff (CRAN), BufferedMatrix
@@ -17,6 +18,6 @@ Description: THIS PACKAGE HAS BEEN DEPRECATED. Do not start building
 License: LGPL (>= 2.1)
 URL: http://www.braju.com/R/
 LazyLoad: TRUE
-Packaged: 2011-07-24 02:23:56 UTC; hb
+Packaged: 2012-07-02 19:06:49 UTC; hb
 Repository: CRAN
-Date/Publication: 2011-07-24 05:14:06
+Date/Publication: 2012-07-03 06:54:26
