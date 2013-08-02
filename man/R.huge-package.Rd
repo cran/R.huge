@@ -22,13 +22,13 @@
 }
 
 \section{Requirements}{
-  This package requires the \pkg{R.oo} package [1] and the
-  \pkg{R.utils} package.
+  This package requires the following CRAN packages:
+  \pkg{R.methodsS3}, \pkg{R.oo} and \pkg{R.utils}.
 }
 
 \section{Installation and updates}{
 
-  To install this package, see \url{http://www.braju.com/R/}.
+  To install this package, use \code{install.packages("R.huge")}.
 }
 
 \section{To get started}{
@@ -43,7 +43,7 @@
   Please cite [1] below.
 }
 
-\author{Henrik Bengtsson (\url{http://www.braju.com/R/})}
+\author{Henrik Bengtsson}
 
 \section{License}{
   The releases of this package is licensed under

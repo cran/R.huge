@@ -1,6 +1,26 @@
 Package: R.huge
 ===============
 
+Version: 0.5.0 [2013-08-02]
+o CLEANUP: Package no longer attaches/loads R.utils (only imports it).
+  However, it will attach ("load") R.utils dynamically, when certain 
+  methods are called.
+
+
+Version: 0.4.4 [2013-05-25]
+o Minor speedup by replacing rm() calls with NULL assignments.
+
+
+Version: 0.4.3 [2013-05-22]
+o CRAN POLICY: Now all Rd \usage{} lines are at most 90 characters long.
+
+
+Version: 0.4.2 [2012-10-16]
+o ROBUSTNESS/BUG FIX: No longer passing '...' to NextMethod(), cf.
+  R-devel thread 'Do *not* pass '...' to NextMethod() - it'll do it 
+  for you; missing documentation, a bug or just me?' on Oct 16, 2012. 
+
+
 Version: 0.4.1 [2012-06-29]
 o Updated package requirements.
 

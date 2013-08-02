@@ -52,7 +52,7 @@
 #
 # \section{Element names}{
 #   The element names are stored in the header and are currently read and
-#   written to file one by one.  This may slow down the performance 
+#   written to file one by one.  This may slow down the performance
 #   substantially if the dimensions are large.  For optimal opening
 #   performance, avoid names.
 #
@@ -62,19 +62,19 @@
 # \section{File format}{
 #   The file format consist of a header section and a data section.
 #   The header contains information about the file format, the length
-#   and element names of the array, as well as data type 
+#   and element names of the array, as well as data type
 #   (storage @see "mode"), the size of each element.
 #   The data section, which follows immediately after the header section,
-#   consists of all data elements with non-assigned elements being 
+#   consists of all data elements with non-assigned elements being
 #   pre-allocated with zeros.
 #
 #   For more details, see the source code.
 # }
 #
 # \section{Limitations}{
-#   The size of the array in bytes is limited by the maximum file size 
+#   The size of the array in bytes is limited by the maximum file size
 #   of the file system.
-#   For instance, the maximum file size on a Windows FAT32 system is 
+#   For instance, the maximum file size on a Windows FAT32 system is
 #   4GB (2GB?).  On Windows NTFS the limit is in practice ~16TB.
 # }
 #
@@ -86,8 +86,13 @@
 # }
 #
 # @visibility public
-#*/########################################################################### 
+#*/###########################################################################
 setConstructorS3("AbstractFileArray", function(filename=NULL, path=NULL, storageMode=c("integer", "double"), bytesPerCell=1, dim=NULL, dimnames=NULL, dimOrder=NULL, comments=NULL, nbrOfFreeBytes=4096) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Validate arguments
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -141,7 +146,7 @@ setConstructorS3("AbstractFileArray", function(filename=NULL, path=NULL, storage
   )
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-  # 
+  #
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   if (!is.null(pathname)) {
     open(this);
@@ -283,6 +288,11 @@ setMethodS3("isOpen", "AbstractFileArray", function(this, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("open", "AbstractFileArray", function(con, ...) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
   # To please R CMD check
   this <- con;
 
@@ -451,6 +461,11 @@ setMethodS3("finalize", "AbstractFileArray", function(this, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("delete", "AbstractFileArray", function(this, ...) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
   if (isOpen(this))
     close(this);
 
@@ -536,6 +551,12 @@ setMethodS3("flush", "AbstractFileArray", function(con, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("clone", "AbstractFileArray", function(con, copyData=TRUE, ...) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
+
   # To please R CMD check
   this <- con;
 
@@ -579,7 +600,7 @@ setMethodS3("clone", "AbstractFileArray", function(con, copyData=TRUE, ...) {
   # Open connection?
   if (isOpen(this)) {
     open(clone);
-  }  
+  }
 
   clone;
 })
@@ -722,7 +743,7 @@ setMethodS3("getBasename", "AbstractFileArray", function(this, ...) {
 #*/###########################################################################
 setMethodS3("getName", "AbstractFileArray", function(this, ...) {
   name <- getBasename(this);
- 
+
   # Strip extension.
   name <- gsub("[.][^.]*$", "", name);
 
@@ -768,7 +789,7 @@ setMethodS3("getName", "AbstractFileArray", function(this, ...) {
 #*/###########################################################################
 setMethodS3("getExtension", "AbstractFileArray", function(this, ...) {
   name <- getBasename(this);
- 
+
   pattern <- "^(.*)[.]([^.]*)$";
   if (regexpr(pattern, name) == -1)
     return(NA);
@@ -974,6 +995,12 @@ setMethodS3("getComments", "AbstractFileArray", function(this, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("setComments", "AbstractFileArray", function(this, comments=NULL, ...) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
+
   # Argument 'comments':
   comments <- Arguments$getCharacter(comments);
 
@@ -1151,12 +1178,12 @@ setMethodS3("writeHeader", "AbstractFileArray", function(this, ...) {
     for (ll in seq(length=nbrOfNames)) {
       offset <- offset + writeString(con, names[ll]);
     }
-    rm(names);
+    names <- NULL; # Not needed anymore
   }
-  
+
   # Update 'commentOffset' field
   this$header$.commentsOffset <- as.double(offset);
-  
+
   # Comments
   offset <- offset + writeString(con, header$comments);
 
@@ -1211,9 +1238,9 @@ setMethodS3("writeHeader", "AbstractFileArray", function(this, ...) {
 #*/###########################################################################
 setMethodS3("readHeader", "AbstractFileArray", function(this, ...) {
   readString <- function(con) {
-    len <- readBin(con=con, what=integer(0), size=4); 
+    len <- readBin(con=con, what=integer(0), size=4);
     count <- 4;
-    
+
     if (len > 0) {
       str <- readChar(con=con, nchars=len);
       count <- count + len + 1;
@@ -1270,7 +1297,7 @@ setMethodS3("readHeader", "AbstractFileArray", function(this, ...) {
   seek(con, where=offset, rw="read");
   header$dimOrder <- readBin(con=con, what=double(0), n=nbrOfDims, size=8);
   offset <- offset + 8 * nbrOfDims;
-  
+
   # Bytes per cell
   seek(con, where=offset, rw="read");
   header$bytesPerCell <- readBin(con=con, what=integer(0), size=4);
@@ -1298,11 +1325,11 @@ setMethodS3("readHeader", "AbstractFileArray", function(this, ...) {
       names[ll] <- str;
     }
     dimnames[[kk]] <- names;
-    rm(names);
+    names <- NULL; # Not needed anymore
   }
   header$dimnames <- dimnames;
-  rm(dimnames);
-  
+  dimnames <- NULL; # Not needed anymore
+
   # Comments
   seek(con, where=offset, rw="read");
   str <- readString(con=con);
@@ -1311,7 +1338,7 @@ setMethodS3("readHeader", "AbstractFileArray", function(this, ...) {
 
   # Number of free bytes before the data section
   header$nbrOfFreeBytes <- header$.dataOffset - offset;
-  
+
   header;
 }, protected=TRUE)  # readHeader()
 
@@ -1413,7 +1440,7 @@ setMethodS3("getStorageMode", "AbstractFileArray", function(this, ...) {
 # }
 #
 # \details{
-#  In \R, an @integer 
+#  In \R, an @integer
 # }
 #
 # @author
@@ -1738,7 +1765,7 @@ setMethodS3("readAllValues", "AbstractFileArray", function(this, mode=getStorage
 # @title "Reads sets of contiguous values in the file array"
 #
 # \description{
-#  @get "title".  
+#  @get "title".
 #  A set of \emph{contiguous} values are values that are connecting without
 #  a break.  It is much faster to read contiguous sequences at once than read
 #  each value separately.
@@ -1773,6 +1800,12 @@ setMethodS3("readAllValues", "AbstractFileArray", function(this, mode=getStorage
 # @keyword programming
 #*/###########################################################################
 setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices, lengths=1, mode=getStorageMode(this), size=getBytesPerCell(this), offset=getDataOffset(this), ..., .checkArgs=TRUE) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
+
   con <- this$con;
 
   n <- length(this);
@@ -1782,7 +1815,7 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
     # (Allow double indices as well in case the 32-bit integer are to short)
     indices <- Arguments$getNumerics(indices, range=c(1,n));
     nbrOfIndices <- length(indices);
-  
+
     # Argument 'lengths':
     n <- length(this);
     # (Allow double length as well in case the 32-bit integer are to short)
@@ -1791,7 +1824,7 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
     if (nbrOfLengths < nbrOfIndices) {
       lengths <- rep(lengths, length.out=nbrOfIndices);
     } else if (nbrOfLengths < nbrOfIndices) {
-      throw("Argument 'length' is longer than argument 'indices': ", 
+      throw("Argument 'length' is longer than argument 'indices': ",
                                             nbrOfLengths, " > ", nbrOfIndices);
     }
   } else {
@@ -1804,7 +1837,7 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
 
   # Calculate file offsets for all starting positions
   fileOffsets <- as.double(offset + (indices-1)*size);
-  rm(indices);
+  indices <- NULL; # Not needed anymore
 
   # Allocate vector for values;
   values <- vector(mode, sum(lengths));
@@ -1830,11 +1863,11 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
 
     # Read the sequence of values at this position
     values[idx] <- readBin(con=con, what=what, n=n, size=size, signed=TRUE);
- 
+
     # Next position
     pos <- pos + n;
   }
-  rm(fileOffsets);
+  fileOffsets <- NULL; # Not needed anymore
 
   values;
 })
@@ -1846,7 +1879,7 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
 # @title "Reads individual values in the file array"
 #
 # \description{
-#  @get "title".  
+#  @get "title".
 # }
 #
 # @synopsis
@@ -1875,6 +1908,12 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
 # @keyword programming
 #*/###########################################################################
 setMethodS3("readValues", "AbstractFileArray", function(this, indices=NULL, mode=getStorageMode(this), size=getBytesPerCell(this), offset=getDataOffset(this), order=FALSE, ..., .checkArgs=TRUE) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
+
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Validate arguments
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -1897,14 +1936,14 @@ setMethodS3("readValues", "AbstractFileArray", function(this, indices=NULL, mode
   res <- sort(indices, index.return=TRUE);
   o <- order(res$ix);
   indices <- res$x;
-  rm(res);
+  res <- NULL; # Not needed anymore
 
   # Allocate array for return value
   mode <- getStorageMode(this);
   values <- vector(mode=mode, length=ni);
 
   fileOffsets <- as.double(offset + (indices-1)*size);
-  rm(indices);
+  indices <- NULL; # Not needed anymore
 
   # Call internal functions directly; less overhead (almost twice as fast)
   ## origin <- pmatch("start", c("start", "current", "end"));
@@ -1915,10 +1954,10 @@ setMethodS3("readValues", "AbstractFileArray", function(this, indices=NULL, mode
     .seekCon(con=con, where=fileOffsets[kk], rw="read");
     values[kk] <- readBin(con=con, what=what, n=1L, size=size, signed=TRUE);
   }
-  rm(fileOffsets);
+  fileOffsets <- NULL; # Not needed anymore
 
   values <- values[o];
-  rm(o);
+  o <- NULL; # Not needed anymore
 
   values;
 })
@@ -1982,7 +2021,7 @@ setMethodS3("writeAllValues", "AbstractFileArray", function(this, values, mode=g
 # @synopsis
 #
 # \arguments{
-#   \item{indices}{An @integer @vector of indices to be updated. 
+#   \item{indices}{An @integer @vector of indices to be updated.
 #     If @NULL, all cells are considered.}
 #   \item{values}{A @numeric @vector of values to be assigned.}
 #   \item{mode}{The storage mode to be used.}
@@ -2007,6 +2046,12 @@ setMethodS3("writeAllValues", "AbstractFileArray", function(this, values, mode=g
 # @keyword programming
 #*/###########################################################################
 setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, values, mode=getStorageMode(this), size=getBytesPerCell(this), offset=getDataOffset(this), order=FALSE, ...) {
+  # WORKAROUND: Until Arguments$...() can be called without
+  # attaching R.utils. /HB 2013-07-03
+  pkgName <- "R.utils";
+  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+
+
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Local functions
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -2038,7 +2083,7 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
   res <- sort(indices, index.return=TRUE);
   indices <- res$x;
   values <- values[res$ix];
-  rm(res);
+  res <- NULL; # Not needed anymore
 
   # Make sure values are of the correct data type.
   storage.mode(values) <- mode;
@@ -2084,7 +2129,7 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
 #   is only used for reading, so if the permission allows for that but
 #   not updating, then open it.
 # o EXCEPTION HANDLING: Methods that creates/modifies files will give
-#   a clear error message if the file permissions does not allow it. 
+#   a clear error message if the file permissions does not allow it.
 # 2006-08-21
 # o BUG FIX: Argument 'dimOrder' of the AbstractFileArray constructor was
 #   not recognized causing weird results if it was intended to be in a
@@ -2093,7 +2138,7 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
 # o Added some more Rdoc comments.
 # 2006-05-09
 # o Added some more Rdoc comments.
-# o Made a few methods protected. 
+# o Made a few methods protected.
 # 2006-03-14
 # o Added getComments() and setComments().
 # o Added a default buffer of free bytes after the header comments.  This
@@ -2103,4 +2148,4 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
 # o Added readSeqsOfValues().
 # 2006-02-27
 # o Created from FileMatrix.R.
-############################################################################ 
+############################################################################
