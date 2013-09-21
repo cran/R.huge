@@ -88,10 +88,13 @@
 # @visibility public
 #*/###########################################################################
 setConstructorS3("AbstractFileArray", function(filename=NULL, path=NULL, storageMode=c("integer", "double"), bytesPerCell=1, dim=NULL, dimnames=NULL, dimOrder=NULL, comments=NULL, nbrOfFreeBytes=4096) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
+  # ROBUSTNESS/WORKAROUND: For now, package attaches the 'R.oo' package.
+  # This is needed due to what appears to be a bug in how R.oo
+  # finalizes Object:s assuming R.oo is/can be attached.  Until that
+  # is resolved, we make sure R.oo is attached. /HB 2013-09-21
+  pkg <- "R.oo";
+  suppressPackageStartupMessages(require(pkg, character.only=TRUE, quietly=TRUE)) || throw("Package not loaded: ", pkg);
+
 
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Validate arguments
@@ -245,15 +248,18 @@ setMethodS3("isOpen", "AbstractFileArray", function(this, ...) {
   if (is.null(this$con))
     return(FALSE);
 
+  # Why the tryCatch()? /HB 2013-09-21
   res <- FALSE;
   tryCatch({
     res <- isOpen(this$con);
+##    res <- base::isOpen(this$con);
   }, error = function(ex) {
+    print(ex)
     this$con <- NULL;
   })
 
   res;
-})
+}, createGeneric=FALSE)
 
 
 
@@ -288,11 +294,6 @@ setMethodS3("isOpen", "AbstractFileArray", function(this, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("open", "AbstractFileArray", function(con, ...) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
-
   # To please R CMD check
   this <- con;
 
@@ -380,6 +381,7 @@ setMethodS3("close", "AbstractFileArray", function(con, ...) {
 
   con <- this$con;
   if (!is.null(con) && isOpen(con)) {
+##  if (!is.null(con) && base::isOpen(con)) {
     flush(con);
     close(con);
     con <- NULL;
@@ -461,11 +463,6 @@ setMethodS3("finalize", "AbstractFileArray", function(this, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("delete", "AbstractFileArray", function(this, ...) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
-
   if (isOpen(this))
     close(this);
 
@@ -551,12 +548,6 @@ setMethodS3("flush", "AbstractFileArray", function(con, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("clone", "AbstractFileArray", function(con, copyData=TRUE, ...) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
-
-
   # To please R CMD check
   this <- con;
 
@@ -995,12 +986,9 @@ setMethodS3("getComments", "AbstractFileArray", function(this, ...) {
 # @keyword programming
 #*/###########################################################################
 setMethodS3("setComments", "AbstractFileArray", function(this, comments=NULL, ...) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
-
-
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Validate arguments
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Argument 'comments':
   comments <- Arguments$getCharacter(comments);
 
@@ -1800,16 +1788,12 @@ setMethodS3("readAllValues", "AbstractFileArray", function(this, mode=getStorage
 # @keyword programming
 #*/###########################################################################
 setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices, lengths=1, mode=getStorageMode(this), size=getBytesPerCell(this), offset=getDataOffset(this), ..., .checkArgs=TRUE) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
-
-
   con <- this$con;
 
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Validate arguments
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   n <- length(this);
-
   if (.checkArgs) {
     # Argument 'indices':
     # (Allow double indices as well in case the 32-bit integer are to short)
@@ -1908,12 +1892,6 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
 # @keyword programming
 #*/###########################################################################
 setMethodS3("readValues", "AbstractFileArray", function(this, indices=NULL, mode=getStorageMode(this), size=getBytesPerCell(this), offset=getDataOffset(this), order=FALSE, ..., .checkArgs=TRUE) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
-
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Validate arguments
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -2046,12 +2024,6 @@ setMethodS3("writeAllValues", "AbstractFileArray", function(this, values, mode=g
 # @keyword programming
 #*/###########################################################################
 setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, values, mode=getStorageMode(this), size=getBytesPerCell(this), offset=getDataOffset(this), order=FALSE, ...) {
-  # WORKAROUND: Until Arguments$...() can be called without
-  # attaching R.utils. /HB 2013-07-03
-  pkgName <- "R.utils";
-  require(pkgName, character.only=TRUE) || throw("Package not loaded: R.utils");
-
-
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Local functions
   # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -2066,6 +2038,10 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
     return(writeAllValues(this, values=values, mode=mode, size=size, offset=offset, ...));
   }
 
+
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  # Validate arguments
+  # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   # Argument 'size':
   size <- Arguments$getInteger(size, range=c(1,8));
 
@@ -2106,6 +2082,11 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
 
 ############################################################################
 # HISTORY:
+# 2013-09-21
+# o ROBUSTNESS/WORKAROUND: For now, package attaches the 'R.oo' package.
+#   This is needed due to what appears to be a bug in how R.oo
+#   finalizes Object:s assuming R.oo is/can be attached.  Until that
+#   is resolved, we make sure R.oo is attached.
 # 2012-04-15
 # o Now no longer calling .Internal() readBin() and writeBin().
 # o Now utilizing new .seekCon() instead of .Internal(seek(...)).

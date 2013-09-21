@@ -1,10 +1,10 @@
-f5ef3d0f98e09d0067fe09172d0dae98 *DESCRIPTION
-1d2d44b319866cc2dba5e93dd48d31ae *NAMESPACE
+f4d39e74f6e9048051d06549546bea88 *DESCRIPTION
+be078806fc1b479d55db07cb1a850f8e *NAMESPACE
 641072cd5600b4d61c9f19f1a654ed07 *R/000.R
-4ac89378c4ea4e1f037cfa35cb69dd27 *R/006.fixVarArgs.R
+be37520f1817118ff591ef4c7054d311 *R/006.fixVarArgs.R
 d0d3d183d70638e15215b1b2c04ba020 *R/999.NonDocumentedObjects.R
 905ceea90364421a56198bed1e1761c9 *R/999.package.R
-28ff21c67a98db44a2244a46ba9d681e *R/AbstractFileArray.R
+7b3888825f2e54acb7a2d44ec3d90c5d *R/AbstractFileArray.R
 95f46edd3c3339a99d6427db680a2570 *R/FileByteMatrix.R
 c556b62ff87de6889c36658320264124 *R/FileByteVector.R
 bf2d3bca38488a0371df4930e39d7838 *R/FileDoubleMatrix.R
@@ -18,8 +18,8 @@ a98ea4e3680454a9df82d41ffa3154af *R/FileMatrix.R
 27c1524957c507eb4aaa4a1eb8d0516f *R/FileShortVector.R
 1c90f04d0aad6dd75fadafb03b964025 *R/FileVector.R
 f98b85bca6994fff13728643bd61dd8a *R/seekCon.R
-bad93f701dcb8e9fbb66ed08b3aaf823 *R/zzz.R
-a9a33d291b056812b703954c4586107a *inst/NEWS
+7683155159a9c8bd54cdb7ef6568ef1b *R/zzz.R
+bc106d667018831d7a39489971274a7f *inst/NEWS
 f212d4ee04b86ec17bf61aab7a94b524 *man/000-LB-.FileMatrix.Rd
 95d6e4b2e42263311041e86cc67ce401 *man/000-LB-.FileVector.Rd
 03a4c9328aeb0a3d7d616ed4d030a788 *man/000-LB-LT_-.FileMatrix.Rd
@@ -28,7 +28,7 @@ f212d4ee04b86ec17bf61aab7a94b524 *man/000-LB-.FileMatrix.Rd
 cc290c6de15d31fa95289640405a56c1 *man/FileMatrix.Rd
 f2e9594ca27d5f47ae8b7cee2f7294e8 *man/FileVector.Rd
 e233abb74c3dd0d0b50e53cead46fe0b *man/Non-documented_objects.Rd
-871c2c9f32d8182997a9300939e86238 *man/R.huge-package.Rd
+598cba091b5935cb9aaeaed6b7b70be0 *man/R.huge-package.Rd
 eae9c1f3f1a3d082881037022304dad9 *man/as.character.AbstractFileArray.Rd
 c274599f3679c47c01a32dec1ed39a1b *man/as.character.FileMatrix.Rd
 aa73dd8ff70f637623c03a86fefc1908 *man/as.matrix.FileMatrix.Rd
@@ -74,5 +74,6 @@ a01848d43c1efddf1328508039f0e89d *man/setComments.AbstractFileArray.Rd
 83d087e46f002f4b57c732206514b539 *man/writeEmptyData.AbstractFileArray.Rd
 d61499129ff7a4c5310080d6a2d97a9a *man/writeHeader.AbstractFileArray.Rd
 c5e88e091e65841e35f9241779623ce9 *man/writeValues.AbstractFileArray.Rd
+5582e7a22692111a966187f2add9e0d7 *tests/FileByteVector.R
 c896a35ec5f15bbfe74f3f7d4ff02aa4 *tests/FileMatrix,bug20070719.R
 6fb2f8899bf70361511fbd0acda8e2c0 *tests/FileMatrix,bug20070821.R
