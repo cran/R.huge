@@ -1,8 +1,8 @@
 Package: R.huge
-Version: 0.6.0
-Depends: R (>= 2.10.0), R.oo (>= 1.15.1)
-Imports: R.methodsS3 (>= 1.5.1), R.utils (>= 1.27.1)
-Date: 2013-09-21
+Version: 0.8.0
+Depends: R (>= 2.10.0)
+Imports: R.methodsS3 (>= 1.6.1), R.oo (>= 1.18.0), R.utils (>= 1.29.8)
+Date: 2014-02-25
 Title: Methods for accessing huge amounts of data [DEPRECATED]
 Authors@R: c(person("Henrik", "Bengtsson", role=c("aut", "cre", "cph"),
                                           email = "henrikb@braju.com"))
@@ -12,7 +12,7 @@ Description: THIS PACKAGE HAS BEEN DEPRECATED. Do not start building new project
 License: LGPL (>= 2.1)
 URL: http://www.braju.com/R/
 LazyLoad: TRUE
-Packaged: 2013-09-21 22:47:20 UTC; hb
+Packaged: 2014-02-25 17:27:55 UTC; hb
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2013-09-22 07:44:41
+Date/Publication: 2014-02-27 00:08:42
