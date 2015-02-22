@@ -1,6 +1,10 @@
 Package: R.huge
 ===============
 
+Version: 0.9.0 [2014-02-22]
+o ROBUSTNESS: Now declaring all S3 methods in NAMESPACE.
+
+
 Version: 0.8.0 [2014-02-25]
 o ROBUSTNESS: Now the package runs the garbage collector if unloaded
   in order to make sure finalize() is called on any deleted

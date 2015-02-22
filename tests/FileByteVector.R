@@ -1,4 +1,7 @@
-library("R.huge");
+library("R.huge")
+
+if ("covr" %in% loadedNamespaces())
+  options("R.utils::onNonSeekable"="warning")
 
 pathname <- tempfile(fileext=".bin")
 

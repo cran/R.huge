@@ -76,7 +76,11 @@ S3method("writeHeaderComments", "AbstractFileArray")
 S3method("writeValues", "AbstractFileArray")
 
 # default
+S3method("colnames", "default")
+S3method("ncol", "default")
+S3method("nrow", "default")
 S3method("rowMeans", "default")
+S3method("rownames", "default")
 S3method("rowSums", "default")
 
 # FileMatrix

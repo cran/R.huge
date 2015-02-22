@@ -1,6 +1,6 @@
-f940324187dc8ee24fb3ff0a90fcfd0c *DESCRIPTION
-c5d3665c7d0e59b750f6c6142da7a416 *NAMESPACE
-5c4a66237bddb8554fdd2ade8feb59eb *NEWS
+6e04e894fbfc588ac02925bd2f6a831e *DESCRIPTION
+999a6e09827c58acd793a6ba4c47ca4d *NAMESPACE
+35928762b00241670d210e3bcc7f3e4a *NEWS
 4bcbb5139128447d6309d89980703e1c *R/000.R
 be37520f1817118ff591ef4c7054d311 *R/006.fixVarArgs.R
 d0d3d183d70638e15215b1b2c04ba020 *R/999.NonDocumentedObjects.R
@@ -24,11 +24,11 @@ f212d4ee04b86ec17bf61aab7a94b524 *man/000-LB-.FileMatrix.Rd
 95d6e4b2e42263311041e86cc67ce401 *man/000-LB-.FileVector.Rd
 03a4c9328aeb0a3d7d616ed4d030a788 *man/000-LB-LT_-.FileMatrix.Rd
 221515277110d2e0968f85f8c2e3df90 *man/000-LB-LT_-.FileVector.Rd
-60ceee7d56bc43232a98dd034bf8944c *man/AbstractFileArray.Rd
-aa56af8ee2fcec2509ed598bd62d3a44 *man/FileMatrix.Rd
-a02b4ff0ccf54e942f618f0d499a53ca *man/FileVector.Rd
+3031a7518c527ed31bd0f1b848ad9702 *man/AbstractFileArray.Rd
+1c65c05ff525b35f86c330b3c1517f46 *man/FileMatrix.Rd
+b6f58b13b5abc240e4058c646b1a3523 *man/FileVector.Rd
 e233abb74c3dd0d0b50e53cead46fe0b *man/Non-documented_objects.Rd
-598cba091b5935cb9aaeaed6b7b70be0 *man/R.huge-package.Rd
+212d8f64944dc860faec387b781b8831 *man/R.huge-package.Rd
 eae9c1f3f1a3d082881037022304dad9 *man/as.character.AbstractFileArray.Rd
 c274599f3679c47c01a32dec1ed39a1b *man/as.character.FileMatrix.Rd
 aa73dd8ff70f637623c03a86fefc1908 *man/as.matrix.FileMatrix.Rd
@@ -74,6 +74,6 @@ a01848d43c1efddf1328508039f0e89d *man/setComments.AbstractFileArray.Rd
 83d087e46f002f4b57c732206514b539 *man/writeEmptyData.AbstractFileArray.Rd
 d61499129ff7a4c5310080d6a2d97a9a *man/writeHeader.AbstractFileArray.Rd
 c5e88e091e65841e35f9241779623ce9 *man/writeValues.AbstractFileArray.Rd
-5582e7a22692111a966187f2add9e0d7 *tests/FileByteVector.R
-c896a35ec5f15bbfe74f3f7d4ff02aa4 *tests/FileMatrix,bug20070719.R
-6fb2f8899bf70361511fbd0acda8e2c0 *tests/FileMatrix,bug20070821.R
+387099b015f839d817e6c681581c05d0 *tests/FileByteVector.R
+70b7a9cae821c953621fe88c4e7ea3f0 *tests/FileMatrix,bug20070719.R
+eff365143ab36c5aed9d649ccbec9bda *tests/FileMatrix,bug20070821.R
