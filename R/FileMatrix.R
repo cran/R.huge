@@ -348,7 +348,7 @@ setMethodS3("writeValues", "FileMatrix", function(this, rows, cols, values, orde
   ints <- seqToIntervals(offsets);
   valueOffset <- 0;
 
-  for (rr in seq(length=nrow(ints))) {
+  for (rr in seq_len(nrow(ints))) {
     from <- ints[rr,1];
     to <- ints[rr,2];
     n <- to-from+1;
@@ -380,7 +380,7 @@ setMethodS3("readValues", "FileMatrix", function(this, rows, cols, order=FALSE, 
 
   ints <- seqToIntervals(offsets);
   valueOffset <- 0;
-  for (rr in seq(length=nrow(ints))) {
+  for (rr in seq_len(nrow(ints))) {
     from <- ints[rr,1];
     to <- ints[rr,2];
     n <- to-from+1;
@@ -657,7 +657,7 @@ setMethodS3("[<-", "FileMatrix", function(this, i, j, value) {
   if (nValue < nIdxs) {
     value <- rep(value, length.out=nIdxs);
   } else if (nValue > nIdxs) {
-    value <- value[seq(length=nIdxs)];
+    value <- value[seq_len(nIdxs)];
   }
 
   writeBinFragments(con=con, value, size=size, idxs=idxs);
@@ -711,20 +711,20 @@ setMethodS3("rowSums", "FileMatrix", function(x, na.rm=FALSE, doCount=FALSE, row
   ncol <- ncol(this);
 
   if (is.null(rows)) {
-    rows <- seq(length=nrow);
+    rows <- seq_len(nrow);
   } else {
     nrow <- length(rows);
   }
 
   if (is.null(columns)) {
-    columns <- seq(length=ncol);
+    columns <- seq_len(ncol);
   } else {
     ncol <- length(columns);
   }
 
   if (getByRow(this)) {
-    sums <- rep(NA, length=nrow);
-    counts <- rep(0, length=nrow);
+    sums <- rep(NA, times=nrow);
+    counts <- rep(0, times=nrow);
     if (na.rm) {
       # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       # Remove NAs before summing
@@ -795,7 +795,7 @@ setMethodS3("rowSums", "FileMatrix", function(x, na.rm=FALSE, doCount=FALSE, row
   # Return counts too?
   if (doCount) {
     if (!na.rm)
-      counts <- rep(ncol, length=nrow);
+      counts <- rep(ncol, times=nrow);
     attr(sums, "counts") <- counts;
   }
 

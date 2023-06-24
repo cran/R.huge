@@ -82,7 +82,7 @@
 #
 # \references{
 #  [1] New Technology File System (NTFS), Wikipedia, 2006
-#      \url{http://en.wikipedia.org/wiki/NTFS}.
+#      \url{https://en.wikipedia.org/wiki/NTFS}.
 # }
 #
 # @visibility public
@@ -123,7 +123,7 @@ setConstructorS3("AbstractFileArray", function(filename=NULL, path=NULL, storage
   if (!is.null(pathname)) {
     if (!isFile(pathname)) {
       if (is.null(dimOrder))
-        dimOrder <- seq(along=dim);
+        dimOrder <- seq_along(dim);
 
       # Create header
       header <- list(
@@ -1133,7 +1133,7 @@ setMethodS3("writeHeader", "AbstractFileArray", function(this, ...) {
   offset <- offset + 8;
 
   # Length of each dimension
-  for (kk in seq(length=nbrOfDims)) {
+  for (kk in seq_len(nbrOfDims)) {
     # Length of dimension 'kk' (double = 8 bytes)
     seek(con, where=offset, rw="write");
     writeBin(con=con, as.double(header$dim[kk]), size=8);
@@ -1155,7 +1155,7 @@ setMethodS3("writeHeader", "AbstractFileArray", function(this, ...) {
   offset <- offset + writeString(con, header$storageMode);
 
   # Dimension names
-  for (kk in seq(length=nbrOfDims)) {
+  for (kk in seq_len(nbrOfDims)) {
     # Number of names for dimension 'kk' (double = 8 bytes)
     names <- header$dimnames[[kk]];
     nbrOfNames <- length(names);
@@ -1163,7 +1163,7 @@ setMethodS3("writeHeader", "AbstractFileArray", function(this, ...) {
     writeBin(con=con, as.double(nbrOfNames), size=8);
     offset <- offset + 8;
 
-    for (ll in seq(length=nbrOfNames)) {
+    for (ll in seq_len(nbrOfNames)) {
       offset <- offset + writeString(con, names[ll]);
     }
     names <- NULL; # Not needed anymore
@@ -1274,7 +1274,7 @@ setMethodS3("readHeader", "AbstractFileArray", function(this, ...) {
 
   # Length of each dimension
   dim <- vector("double", nbrOfDims);
-  for (kk in seq(length=nbrOfDims)) {
+  for (kk in seq_len(nbrOfDims)) {
     seek(con, where=offset, rw="read");
     dim[kk] <- readBin(con=con, what=double(0), size=8);
     offset <- offset + 8;
@@ -1299,14 +1299,14 @@ setMethodS3("readHeader", "AbstractFileArray", function(this, ...) {
 
   # Dimension names
   dimnames <- vector("list", nbrOfDims);
-  for (kk in seq(length=nbrOfDims)) {
+  for (kk in seq_len(nbrOfDims)) {
     # Number of names for dimension 'kk' (double = 8 bytes)
     seek(con, where=offset, rw="read");
     nbrOfNames <- readBin(con=con, what=double(0), size=8);
     offset <- offset + 8;
 
     names <- vector("character", nbrOfNames);
-    for (ll in seq(length=nbrOfNames)) {
+    for (ll in seq_len(nbrOfNames)) {
       seek(con, where=offset, rw="read");
       str <- readString(con=con);
       offset <- offset + attr(str, "count");
@@ -1833,7 +1833,7 @@ setMethodS3("readContiguousValues", "AbstractFileArray", function(this, indices,
   what <- mode;
   ## origin <- pmatch("start", c("start", "current", "end"));
   ## rw <- pmatch("read", c("read", "write"), 0);
-  for (kk in seq(length=nbrOfIndices)) {
+  for (kk in seq_len(nbrOfIndices)) {
     # Move to start position
     # seek(con=con, where=fileOffsets[kk], rw="read");
     ## .Internal(seek(con, fileOffsets[kk], origin, rw));
@@ -1926,7 +1926,7 @@ setMethodS3("readValues", "AbstractFileArray", function(this, indices=NULL, mode
   # Call internal functions directly; less overhead (almost twice as fast)
   ## origin <- pmatch("start", c("start", "current", "end"));
   ## rw <- pmatch("read", c("read", "write"), 0);
-  for (kk in seq(length=ni)) {
+  for (kk in seq_len(ni)) {
     # seek(con=con, where=fileOffsets[kk], rw="read");
     ## .Internal(seek(con, fileOffsets[kk], origin, rw));
     .seekCon(con=con, where=fileOffsets[kk], rw="read");
@@ -2049,7 +2049,7 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
 
   # The number of elements to read
   if (is.null(indices)) {
-    indices <- seq(along=values);
+    indices <- seq_along(values);
   } else {
   }
 
@@ -2069,7 +2069,7 @@ setMethodS3("writeValues", "AbstractFileArray", function(this, indices=NULL, val
   # Call internal functions directly; less overhead
   ## origin <- pmatch("start", c("start", "current", "end"));
   ## rw <- pmatch("write", c("read", "write"), 0);
-  for (kk in seq(length=ni)) {
+  for (kk in seq_len(ni)) {
     # seek(con=con, where=fileOffsets[kk], rw="write");
     ## .Internal(seek(con, fileOffsets[kk], origin, rw));
     .seekCon(con=con, where=fileOffsets[kk], rw="write");

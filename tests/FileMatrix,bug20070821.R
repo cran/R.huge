@@ -26,7 +26,7 @@ for (byrow in c(FALSE, TRUE)) {
 
   rr <- 6:2
   cc <- c(1,8,4,2:3)
-  X[rr,cc] <- seq(length=length(rr)*length(cc))
+  X[rr,cc] <- seq_len(length(rr)*length(cc))
   Y[rr,cc] <- X[rr,cc]
   stopifnot(identical(X[], Y[]))
 

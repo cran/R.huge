@@ -2,7 +2,6 @@
 # IMPORTS
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 importFrom("R.methodsS3", "setMethodS3")
-importFrom("R.methodsS3", "throw")
 importFrom("R.methodsS3", "appendVarArgs")
 
 importFrom("R.oo", "setConstructorS3")
@@ -15,6 +14,7 @@ importFrom("R.oo", "startupMessage")
 importFrom("R.oo", "finalize")
 importFrom("R.oo", "getName")
 importFrom("R.oo", "getPath")
+importFrom("R.oo", "throw")
 
 importFrom("R.utils", "Arguments")
 importFrom("R.utils", "isFile")
