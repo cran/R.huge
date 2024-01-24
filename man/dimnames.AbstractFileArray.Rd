@@ -21,10 +21,6 @@
 \method{dimnames}{AbstractFileArray}(x)
 }
 
-\arguments{
-  \item{...}{Not used.}
-}
-
 \value{
  Returns a \code{\link[base]{character}} \code{\link[base]{vector}}.
 }

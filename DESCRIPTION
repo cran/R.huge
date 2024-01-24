@@ -1,5 +1,5 @@
 Package: R.huge
-Version: 0.10.0
+Version: 0.10.1
 Depends: R (>= 2.10.0)
 Imports: R.methodsS3 (>= 1.7.0), R.oo (>= 1.23.0), R.utils (>= 1.34.0)
 Title: Methods for Accessing Huge Amounts of Data [deprecated]
@@ -13,6 +13,6 @@ LazyLoad: TRUE
 URL: https://github.com/HenrikBengtsson/R.huge
 BugReports: https://github.com/HenrikBengtsson/R.huge/issues
 NeedsCompilation: no
-Packaged: 2023-06-24 21:54:05 UTC; henrik
+Packaged: 2024-01-24 05:44:26 UTC; henrik
 Repository: CRAN
-Date/Publication: 2023-06-24 22:50:02 UTC
+Date/Publication: 2024-01-24 06:22:45 UTC

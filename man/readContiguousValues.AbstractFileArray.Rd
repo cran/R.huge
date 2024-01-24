@@ -28,7 +28,7 @@
 \arguments{
   \item{indices}{A \code{\link[base]{numeric}} \code{\link[base]{vector}} of start (first) indices in each of
     the contiguous sets.}
-  \item{length}{A \code{\link[base]{numeric}} \code{\link[base]{vector}} specifying the length of each of the
+  \item{lengths}{A \code{\link[base]{numeric}} \code{\link[base]{vector}} specifying the length of each of the
     contiguous sets.}
   \item{mode}{The storage mode to read.}
   \item{size}{The number of bytes each values allocates on file.}

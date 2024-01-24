@@ -21,10 +21,6 @@
 \method{length}{AbstractFileArray}(x)
 }
 
-\arguments{
-  \item{...}{Not used.}
-}
-
 \value{
  Returns a \code{\link[base]{double}} (since the largest \code{\link[base]{integer}} is only 2147483648-1).
 }

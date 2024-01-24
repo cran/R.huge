@@ -1598,10 +1598,6 @@ setMethodS3("dim", "AbstractFileArray", function(x) {
 #
 # @synopsis
 #
-# \arguments{
-#   \item{...}{Not used.}
-# }
-#
 # \value{
 #  Returns a @double (since the largest @integer is only 2147483648-1).
 # }
@@ -1634,10 +1630,6 @@ setMethodS3("length", "AbstractFileArray", function(x) {
 # }
 #
 # @synopsis
-#
-# \arguments{
-#   \item{...}{Not used.}
-# }
 #
 # \value{
 #  Returns a @character @vector.
@@ -1764,7 +1756,7 @@ setMethodS3("readAllValues", "AbstractFileArray", function(this, mode=getStorage
 # \arguments{
 #   \item{indices}{A @numeric @vector of start (first) indices in each of
 #     the contiguous sets.}
-#   \item{length}{A @numeric @vector specifying the length of each of the
+#   \item{lengths}{A @numeric @vector specifying the length of each of the
 #     contiguous sets.}
 #   \item{mode}{The storage mode to read.}
 #   \item{size}{The number of bytes each values allocates on file.}
